@@ -1,41 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Suspense } from "react";
+import { Link } from "react-router-dom";
+import { useAtom } from "jotai";
 
-import Loading from "../Loading";
+import { articlesAtom } from "../../atoms/articles.atom";
+import LoadingText from "../LoadingText";
 import ArticleCard from "./ArticleCard";
 import ArticleControls from "./ArticleControls";
-import { getArticles } from "../../api/articles";
 
-const ArticleList = ({ setIsLoading, setError }) => {
-  const { author, topic, sort, order } = useParams();
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    setError(null);
-    getArticles(author, topic, sort, order)
-      .then((newArticles) => {
-        setArticles(newArticles);
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [author, order, setIsLoading, setError, sort, topic]);
+const ArticleList = () => {
+  const [articles] = useAtom(articlesAtom);
 
   return (
-    <>
+    <Suspense fallback={<LoadingText />}>
       <ArticleControls />
       <div>
-        {articles.map((article) => (
+        {articles.data.articles.map((article) => (
           <Link key={article.article_id} to={`/articles/${article.article_id}`}>
             <ArticleCard article={article} />
           </Link>
         ))}
       </div>
-    </>
+    </Suspense>
   );
 };
 
-export default Loading(ArticleList, "Loading Articles...");
+export default ArticleList;
