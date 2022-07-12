@@ -12,11 +12,12 @@ import Home from "./Home";
 import Login from "./users/Login";
 import Logout from "./users/Logout";
 import Register from "./users/Register";
+import LoadingText from "./LoadingText";
 
 function App() {
   return (
     <Provider>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LoadingText />}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="" element={<Home />} />
