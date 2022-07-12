@@ -1,6 +1,5 @@
 .home {
   display: grid;
-  grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
 }
 
@@ -24,4 +23,35 @@ h3 {
 
 .home a:hover {
   background: black;
+}
+
+.github-container {
+  padding: 0.5rem;
+  border: 3px solid black;
+  margin: 0.5rem;
+  background-color: #fff5ee;
+}
+
+.github-container a {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.commit {
+  display: grid;
+  grid-template-columns: 1rem 6rem 1fr;
+  align-items: center;
+}
+
+.commit:last-of-type {
+  margin-bottom: 0.4rem;
+}
+
+.commit i {
+  font-size: 2rem;
+}
+
+.commit time {
+  text-align: center;
 }
