@@ -31,7 +31,7 @@ const Home = () => {
         {apiCommits.data.feed.map(({ pubDate, title, link }) => (
           <Commit pubDate={pubDate} title={title} key={link} />
         ))}
-        <a href="https://github.com/mcwake-dev/nc-news-fe-vite">
+        <a href="https://github.com/mcwake-dev/nc-news-api">
           <i className="fa fa-github"></i> View on Github
         </a>
       </section>
