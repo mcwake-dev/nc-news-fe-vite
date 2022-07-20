@@ -1,0 +1,42 @@
+.article-link {
+}
+
+.article {
+  border: 3px solid black;
+  margin: 0.5rem;
+}
+
+.article .title {
+  margin: 0;
+  padding: 0.1rem;
+}
+
+.article header {
+  background: white;
+  margin: 0;
+  padding: 0;
+  border-bottom: 3px solid black;
+}
+
+.user-header {
+  display: grid;
+  grid-template-columns: 0.5rem repeat(3, 1fr);
+  font-size: 0.7rem;
+  border-bottom: 3px solid black;
+}
+
+.user-header h3 {
+  justify-self: center;
+  margin: 0.2rem;
+}
+
+.article-footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.article-footer p {
+  margin: 0;
+  padding: 0.1rem;
+}

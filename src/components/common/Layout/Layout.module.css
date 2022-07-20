@@ -1,0 +1,10 @@
+.container {
+  min-height: 100vh;
+  display: grid;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    grid-template-rows: 100% minmax(calc(100vh - 5.7rem + 1px), 100%), 2.5rem;
+  }
+}

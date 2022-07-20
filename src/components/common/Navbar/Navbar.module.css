@@ -1,0 +1,76 @@
+.navbar {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.burger {
+  border: 0;
+  border-left: 3px solid black;
+  background: white;
+  height: 100%;
+}
+
+.menuActive {
+  display: block;
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: 1rem 1fr 2rem;
+  border: 3px solid black;
+  align-items: center;
+}
+
+.colourBar {
+  background-color: red;
+  border-right: 3px solid black;
+  height: 100%;
+}
+
+.menu {
+  display: none;
+  border: 3px solid black;
+}
+
+.item {
+  display: block;
+}
+
+@media screen and (min-width: 800px) {
+  .navbar {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    align-items: center;
+    border: 3px solid black;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .brand {
+    border: 0;
+    border-right: 3px solid black;
+    height: 100%;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 6rem;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    border-right: 3px solid black;
+  }
+
+  .auth {
+    padding-left: 0.5rem;
+    background-color: #e9967a;
+  }
+}
