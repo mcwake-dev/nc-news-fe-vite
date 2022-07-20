@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Provider } from "jotai";
 import { Suspense } from "react";
 
-import Layout from "./Layout";
+import Layout from "./common/Layout";
 import ArticleList from "./articles/ArticleList";
 import Article from "./articles/Article";
 import NewArticle from "./articles/NewArticle";
@@ -12,7 +12,7 @@ import Home from "./Home";
 import Login from "./users/Login";
 import Logout from "./users/Logout";
 import Register from "./users/Register";
-import LoadingText from "./LoadingText";
+import LoadingText from "./common/LoadingText";
 
 function App() {
   return (
@@ -21,11 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="" element={<Home />} />
-            <Route
-              path="author/:author/topic/:topic/sort-by/:sort/order/:order"
-              element={<ArticleList />}
-            />
             <Route path="/articles">
+              <Route path="" element={<ArticleList />} />
               <Route path="new" element={<NewArticle />} />
               <Route path=":article_id" element={<Article />} />
             </Route>
