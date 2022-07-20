@@ -1,47 +1,27 @@
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
+import { useAtom } from "jotai";
+
 import CommentCard from "./CommentCard";
-
-import { getArticleComments } from "../../api/articles";
-import Loading from "../Loading";
+import LoadingText from "../common/LoadingText";
 import CommentForm from "./CommentForm";
+import { articleCommentsAtom } from "../../atoms/articles.atom";
 
-const CommentList = ({ article_id, setIsLoading, setError }) => {
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    setError(null);
-    getArticleComments(article_id)
-      .then((newComments) => {
-        setComments(newComments);
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [setComments, article_id, setIsLoading, setError]);
+const CommentList = () => {
+  const [commentsResponse] = useAtom(articleCommentsAtom);
+  const comments = commentsResponse.data.comments;
 
   return (
-    <>
+    <Suspense fallback={<LoadingText />}>
       <section>
-        <CommentForm
-          article_id={article_id}
-          setComments={setComments}
-          comments={comments}
-        />
+        <CommentForm comments={comments} />
       </section>
       <section>
         {comments.map((comment) => (
-          <CommentCard
-            key={comment.comment_id}
-            comment={comment}
-            setComments={setComments}
-          />
+          <CommentCard key={comment.comment_id} comment={comment} />
         ))}
       </section>
-    </>
+    </Suspense>
   );
 };
 
-export default Loading(CommentList, "Loading comments...", true);
+export default CommentList;

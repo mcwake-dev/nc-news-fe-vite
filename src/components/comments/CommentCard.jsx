@@ -2,7 +2,6 @@ import * as dayjs from "dayjs";
 
 import VoteControls from "../forms/VoteControls";
 import DeleteComment from "./DeleteComment";
-import SortAndFilterLink from "../SortAndFilterLink";
 
 const CommentCard = ({
   comment: { author, body, comment_id, created_at, votes },
@@ -11,8 +10,7 @@ const CommentCard = ({
   return (
     <article className="notification is-primary is-light">
       <h3 className="is-size-5">
-        Posted by{" "}
-        <SortAndFilterLink param={author} title={author} linkType={"author"} />{" "}
+        Posted by {author}
         on{" "}
         {`${dayjs(created_at).format("ddd D MMM YYYY")} at ${dayjs(
           created_at
