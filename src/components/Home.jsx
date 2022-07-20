@@ -22,9 +22,7 @@ const Home = () => {
             <li>Interaction with a Node.js/PostgreSQL REST API</li>
           </ul>
         </div>
-        <Link to="/author/all/topic/all/sort-by/created_at/order/desc">
-          To the Articles!
-        </Link>
+        <Link to="/articles">To the Articles!</Link>
       </section>
       <section className="github-container">
         <h3>API Updates</h3>
