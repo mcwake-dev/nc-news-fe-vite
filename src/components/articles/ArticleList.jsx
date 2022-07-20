@@ -1,9 +1,8 @@
 import { Suspense } from "react";
-import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 
 import { articlesAtom } from "../../atoms/articles.atom";
-import LoadingText from "../LoadingText";
+import LoadingText from "../common/LoadingText";
 import ArticleCard from "./ArticleCard";
 import ArticleControls from "./ArticleControls";
 
@@ -15,9 +14,10 @@ const ArticleList = () => {
       <ArticleControls />
       <div>
         {articles.data.articles.map((article) => (
-          <Link key={article.article_id} to={`/articles/${article.article_id}`}>
-            <ArticleCard article={article} />
-          </Link>
+          <ArticleCard
+            article={article}
+            key={`article-${article.article_id}`}
+          />
         ))}
       </div>
     </Suspense>
