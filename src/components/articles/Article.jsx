@@ -1,34 +1,22 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
+import { useAtom } from "jotai";
 
-import { getArticle } from "../../api/articles";
-import Loading, { LOADING, LOADED } from "../Loading";
+import { articleAtom } from "../../atoms/articles.atom";
 import ArticleCard from "./ArticleCard";
 import CommentList from "../comments/CommentList";
+import LoadingText from "../common/LoadingText";
 
-const Article = ({ setIsLoading, setError }) => {
-  const { article_id } = useParams();
-  const [article, setArticle] = useState({});
-
-  useEffect(() => {
-    setError(null);
-    getArticle(article_id)
-      .then((newArticle) => {
-        setArticle(newArticle);
-      })
-      .catch((err) => {
-        setError({ ...err, message: "Failed to load article" });
-      })
-      .finally(() => {
-        setIsLoading(LOADED);
-      });
-  }, [article_id, setArticle, setError, setIsLoading]);
+const Article = () => {
+  const [articleResponse] = useAtom(articleAtom);
+  const article = articleResponse.data.article;
 
   return (
-    <ArticleCard article={article}>
-      <CommentList article_id={article_id} />
-    </ArticleCard>
+    <Suspense fallback={<LoadingText />}>
+      <ArticleCard article={article}>
+        <CommentList />
+      </ArticleCard>
+    </Suspense>
   );
 };
 
-export default Loading(Article, "Loading article...", LOADING);
+export default Article;
