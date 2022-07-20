@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 import Authenticated, { AUTHENTICATED_ONLY } from "../users/Authenticated";
-import Loading, { LOADING, LOADED } from "../Loading";
 import { deleteArticle } from "../../api/articles";
 
 const DeleteArticle = ({
@@ -36,8 +35,4 @@ const DeleteArticle = ({
   }
 };
 
-export default Loading(
-  Authenticated(DeleteArticle, AUTHENTICATED_ONLY),
-  "Deleting Article...",
-  LOADED
-);
+export default Authenticated(DeleteArticle, AUTHENTICATED_ONLY);
