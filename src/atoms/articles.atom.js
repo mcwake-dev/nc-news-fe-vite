@@ -5,15 +5,16 @@ import { API } from "../api/constants";
 
 const ARTICLES_API = `${API}/articles`;
 
-export const highestVotedArticlesAtom = atom(async () =>
-  axios.get(new URL(`${ARTICLES_API}/highest`))
-);
-
-export const filtersAtom = atom(["all", "all", "created_at", "desc"]);
+export const filtersAtom = atom({
+  author: "all",
+  topic: "all",
+  sort_by: "created_at",
+  order: "desc",
+});
 
 export const articlesAtom = atom(async (get) => {
   const filterUrl = new URL(ARTICLES_API);
-  const [author, topic, sort, order] = get(filtersAtom);
+  const { author, topic, sort, order } = get(filtersAtom);
 
   if (author && author !== "all") {
     filterUrl.searchParams.append("author", author);
@@ -32,4 +33,25 @@ export const articlesAtom = atom(async (get) => {
   }
 
   return axios.get(filterUrl);
+});
+
+export const articleIdAtom = atom();
+
+export const articleAtom = atom(async (get) => {
+  const articleId = get(articleIdAtom);
+
+  if (articleId) {
+    return axios.get(`${ARTICLES_API}/${articleId}`);
+  }
+
+  return {};
+});
+
+export const articleCommentsAtom = atom(async (get) => {
+  const articleId = get(articleIdAtom);
+
+  if (articleId) {
+    return axios.get(`${ARTICLES_API}/${articleId}/comments`);
+  }
+  return [];
 });
